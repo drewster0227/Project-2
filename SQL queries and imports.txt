@@ -1,0 +1,66 @@
+﻿CREATE TABLE contacts (
+    contact_id INT PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    email VARCHAR(255)
+);
+
+
+COPY contacts FROM 'C:/Users/dreww/Desktop/DataAnalysisWork/Assignments/Project 2 files/Starter_Files/Starter_Files/Resources/contacts.csv' DELIMITER ',' CSV HEADER;
+DROP TABLE IF EXISTS contacts;
+
+
+Select * FROM contacts
+
+
+
+
+CREATE TABLE subcategory (
+    subcategory_id VARCHAR(10) PRIMARY KEY,
+    subcategory VARCHAR(100) NOT NULL
+);
+
+
+COPY subcategory FROM 'C:/Users/dreww/Desktop/DataAnalysisWork/Assignments/Project 2 files/Starter_Files/Starter_Files/Resources/subcategory.csv' DELIMITER ',' CSV HEADER;
+
+
+Select * FROM subcategory
+
+
+CREATE TABLE category (
+    category_id VARCHAR(10) PRIMARY KEY,
+    category VARCHAR(100) NOT NULL
+);
+
+
+COPY category FROM 'C:/Users/dreww/Desktop/DataAnalysisWork/Assignments/Project 2 files/Starter_Files/Starter_Files/Resources/category.csv' DELIMITER ',' CSV HEADER;
+
+
+Select * FROM category
+
+
+CREATE TABLE campaign (
+    cf_id INTEGER PRIMARY KEY,
+    contact_id INTEGER REFERENCES contacts(contact_id),
+    company_name VARCHAR(100),
+    description TEXT,
+    goal NUMERIC,
+    pledged NUMERIC,
+    outcome VARCHAR(100),
+    backers_count INTEGER,
+    country VARCHAR(20),
+    currency VARCHAR(30),
+    launched_date DATE,
+    end_date DATE,
+    category_id VARCHAR(100) REFERENCES category(category_id),
+    subcategory_id VARCHAR(100) REFERENCES subcategory(subcategory_id)
+);
+
+
+COPY campaign FROM 'C:/Users/dreww/Desktop/DataAnalysisWork/Assignments/Project 2 files/Starter_Files/Starter_Files/Resources/campaign.csv' DELIMITER ',' CSV HEADER;
+
+
+DROP TABLE IF EXISTS campaign;
+
+
+SELECT * FROM campaign;
